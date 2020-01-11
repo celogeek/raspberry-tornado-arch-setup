@@ -1,0 +1,13 @@
+[Unit]
+Description=3D printer firmware with motion planning on the host
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+User=klipper
+RemainAfterExit=yes
+ExecStart=/usr/bin/python2 /opt/klipper/klippy/klippy.py /etc/octoprint-tornado/klipper.cfg -I /run/klipper/sock
+Restart=always
+RestartSec=10

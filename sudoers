@@ -1,0 +1,5 @@
+%octoprint ALL=() NOPASSWD: REBOOT, \
+	systemctl start octoprint-tornado-webcam, \
+	systemctl stop octoprint-tornado-webcam, \
+	systemctl restart octoprint-tornado-web
+

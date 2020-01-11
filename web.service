@@ -11,5 +11,5 @@ ExecStart=/usr/bin/octoprint serve --host 127.0.0.1 --port 5000 -b /var/lib/octo
 Restart=on-failure
 
 [Install]
-WantedBy=octoprint-proxy.service
+WantedBy=octoprint-tornado-proxy.service
 

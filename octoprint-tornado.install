@@ -6,10 +6,13 @@ post_install()
 
 pre_remove()
 {
-	systemctl stop octoprint-proxy
-	systemctl stop octoprint-web
-	systemctl disable octoprint-proxy
-	systemctl disable octoprint-web
+	for n in proxy web webcam klipper
+	do
+		systemctl stop octoprint-tornado-$n
+		systemctl disable octoprint-tornado-$n
+	done
+	udevadm control --reload-rules
+	systemctl daemon-reload
 }
 
 

@@ -1,14 +1,21 @@
 [Unit]
 Description=3D printer firmware with motion planning on the host
 Conflicts=klipper.service
+BindsTo=dev-tornado.device
+Wants=octoprint-tornado-webcam.service
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=dev-tornado.device
 
 [Service]
 Type=simple
 User=klipper
 RemainAfterExit=yes
 ExecStart=/usr/bin/python2 /opt/klipper/klippy/klippy.py /etc/klipper/klipper.cfg -I /run/klipper/sock
+ExecStartPost=/bin/sleep 5
+ExecStartPost=-/usr/bin/curl -s 'http://localhost/api/connection' -H 'Content-Type: application/json' --data-binary '{"command":"connect"}'
+ExecStop=/usr/bin/curl -s 'http://localhost/api/connection' -H 'Content-Type: application/json' --data-binary '{"command":"disconnect"}'
+ExecStop=-/bin/sleep 5
 Restart=always
 RestartSec=10
+

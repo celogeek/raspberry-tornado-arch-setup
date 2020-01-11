@@ -1,6 +1,6 @@
 pkgname=octoprint-tornado
 pkgver=20200111
-pkgrel=14
+pkgrel=15
 pkgdesc="control my tornado installation"
 arch=(any)
 depends=(haproxy octoprint-venv mjpg-streamer-git)
@@ -12,6 +12,7 @@ source=(
 	octoprint-web.service
 	octoprint-webcam.service
 	octoprint-klipper.service
+	octoprint-tornado-udev.rules
 )
 
 sha256sums=('18ce947f1f63617aeccd62835059a03b138cfe3850026d444a7b37f03a99a3dc'
@@ -20,7 +21,8 @@ sha256sums=('18ce947f1f63617aeccd62835059a03b138cfe3850026d444a7b37f03a99a3dc'
             '33feb20be2ad35b1eb412dc3a689c88f7a7ccfb9e0b4428216119983d3071d42'
             '44497818493422ec1908fae0107061131edd09912280e819062dc8eabe01f7c7'
             '5159287dc4fcadba54f501aed56c73374648ccfdb4553b532fa75fd0b24fcb3b'
-            '4a286cbaaaa0a75231b6ce32170750e69b62836ff9ba69c6a351206db9f459d2')
+            '4a286cbaaaa0a75231b6ce32170750e69b62836ff9ba69c6a351206db9f459d2'
+            'b0e25a7ab1365e7c860b85de3348bd668c5e25695d9d4edcae26885caa76e2b4')
 
 install=$pkgname.install
 
@@ -32,6 +34,7 @@ package() {
 	done
 	install -Dm644 "$srcdir/sysusers.conf" "$pkgdir/usr/lib/sysusers.d/mjpg-streamer.conf"
 	install -Dm644 "$srcdir/tmpfiles.conf" "$pkgdir/usr/lib/tmpfiles.d/$pkgname.conf"
+	install -Dm644 "$srcdir/octoprint-tornado-udev.rules" "${pkgdir}/usr/lib/udev/rules.d/octoprint-tornado.rules"
 }
 
 

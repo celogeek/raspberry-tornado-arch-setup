@@ -1,0 +1,2 @@
+ACTION=="add",SUBSYSTEMS=="tty",ENV{ID_SERIAL}=="FTDI_FT232R_USB_UART_A907LDST",SYMLINK+="tornado",TAG+="systemd",ENV{SYSTEMD_USER_WANTS}="klipper.service"
+KERNEL=="video0", SYMLINK="webcam",TAG+="systemd",ENV{SYSTEMD_USER_WANTS}="webcam.service"

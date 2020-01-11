@@ -5,7 +5,7 @@ Description=Webcam
 [Service]
 Type=simple
 User=mjpg-streamer
-ExecStart=/usr/bin/mjpg_streamer -o "output_http.so" -i "input_uvc.so -r 1280x720 -f 30"
+ExecStart=/usr/bin/mjpg_streamer -o "output_http.so" -i "input_uvc.so -d /dev/webcam -r 1280x720 -f 30"
 
 [Install]
 ; WantedBy=dev-webcam.device

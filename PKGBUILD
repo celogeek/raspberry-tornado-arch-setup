@@ -1,6 +1,6 @@
 pkgname=octoprint-tornado
 pkgver=20200111
-pkgrel=19
+pkgrel=23
 pkgdesc="control my tornado installation"
 arch=(any)
 depends=(haproxy octoprint-venv mjpg-streamer-git)
@@ -13,6 +13,7 @@ source=(
 	webcam.service
 	klipper.service
 	udev.rules
+	touchui.less
 )
 
 sha256sums=('a9e47a2bea34ab898cf38c6694ff4ed28cfc753411bdeee1344da3dadb52caa8'
@@ -20,14 +21,16 @@ sha256sums=('a9e47a2bea34ab898cf38c6694ff4ed28cfc753411bdeee1344da3dadb52caa8'
             '47546d4400ca02c73da3698e4b27cef87cdb64c05f45a613b4a5fdad6e17d763'
             '76a5b44c380db9d6f0935fd1aaaafb9e8c0bcc279ecbcd2d788f6296f6637591'
             'e676dc064412b72df8bcaa3ca360257b33b499232939a22b4d5e6775be30df92'
-            'ca024a69ef997893f86ec20903bc3682ddd1f3144e610164678d452a47be007e'
-            '73f07e0c1f16b4a261ea18cdb6e751f485ac6dbb245b873dd21ed23b4aa6d599'
-            'b0e25a7ab1365e7c860b85de3348bd668c5e25695d9d4edcae26885caa76e2b4')
+            'ced3ef7271fa27bb07a4b5c7be08fc775519ddbb791315d325c726b061e2d55a'
+            '6ed0fa4c6e971dafd05ad199486412ac13413545288c153ab70ef05e1100d3e5'
+            '9d7a98dbd4a7f793507e0a52fbddb5c21442a0c500e247fb38ffbf19c7dac03c'
+            'a8e7d3bf79c9f4974f66eeaa892ba2bac571825592906077f91bc24035a42da5')
 
 install=$pkgname.install
 
 package() {
 	install -Dm644 haproxy.cfg $pkgdir/usr/lib/$pkgname/haproxy.cfg
+	install -Dm644 touchui.less $pkgdir/usr/lib/$pkgname/touchui.less
 	for SERVICE in *.service
 	do
 		install -Dm644 "$SERVICE" "$pkgdir/usr/lib/systemd/system/${pkgname}-${SERVICE}"

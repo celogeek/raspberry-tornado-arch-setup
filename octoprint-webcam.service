@@ -1,0 +1,10 @@
+[Unit]
+Description=Webcam
+; BindsTo=dev-webcam.device klipper.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/mjpg_streamer -o "output_http.so" -i "input_uvc.so -r 1280x720 -f 30"
+
+[Install]
+; WantedBy=dev-webcam.device

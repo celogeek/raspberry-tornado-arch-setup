@@ -1,6 +1,7 @@
 [Unit]
 Description=3D Printing Web Server
 After=network.target
+Conflicts=octoprint.service
 
 [Service]
 User=octoprint

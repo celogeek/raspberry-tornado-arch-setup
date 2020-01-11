@@ -1,5 +1,6 @@
 [Unit]
 Description=3D printer firmware with motion planning on the host
+Conflicts=klipper.service
 
 [Install]
 WantedBy=multi-user.target

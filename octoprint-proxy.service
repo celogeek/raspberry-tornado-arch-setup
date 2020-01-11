@@ -1,6 +1,7 @@
 [Unit]
 Description=HAProxy Load Balancer
 After=network.target
+Conflicts=haproxy.service
 
 [Service]
 Environment="CONFIG=/usr/lib/octoprint-tornado/haproxy.cfg" "PIDFILE=/run/octoprint-proxy.pid" "EXTRAOPTS=-S /run/octoprint-proxy.sock"

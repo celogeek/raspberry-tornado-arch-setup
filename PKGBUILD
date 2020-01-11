@@ -1,9 +1,9 @@
 pkgname=octoprint-tornado
 pkgver=20200111
-pkgrel=7
+pkgrel=8
 pkgdesc="control my tornado installation"
-arch=(armv6h armv7h aarch64)
-depends=(haproxy octoprint-venv)
+arch=(any)
+depends=(haproxy octoprint-venv mjpg-streamer-git)
 source=(
 	tmpfiles.conf
 	sysusers.conf

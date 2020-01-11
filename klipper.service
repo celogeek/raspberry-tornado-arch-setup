@@ -9,6 +9,6 @@ WantedBy=multi-user.target
 Type=simple
 User=klipper
 RemainAfterExit=yes
-ExecStart=/usr/bin/python2 /opt/klipper/klippy/klippy.py /etc/octoprint-tornado/klipper.cfg -I /run/klipper/sock
+ExecStart=/usr/bin/python2 /opt/klipper/klippy/klippy.py /etc/klipper/klipper.cfg -I /run/klipper/sock
 Restart=always
 RestartSec=10

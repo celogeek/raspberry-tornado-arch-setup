@@ -7,7 +7,7 @@ Conflicts=octoprint.service
 User=octoprint
 Group=octoprint
 Type=simple
-ExecStart=/usr/bin/octoprint serve --host 127.0.0.1 --port 5000 -b /var/lib/octoprint-tornado -c /etc/octoprint-tornado/web.yaml
+ExecStart=/usr/bin/octoprint serve --host 127.0.0.1 --port 5000 -b /var/lib/octoprint-tornado -c /etc/octoprint-tornado/config.yaml
 Restart=on-failure
 
 [Install]

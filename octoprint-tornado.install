@@ -1,0 +1,19 @@
+post_install()
+{
+	systemctl daemon-reload
+}
+
+post_upgrade()
+{
+	systemctl daemon-reload
+}
+
+pre_remove()
+{
+	systemctl stop octoprint-proxy
+	systemctl stop octoprint-web
+	systemctl disable octoprint-proxy
+	systemctl disable octoprint-web
+}
+
+

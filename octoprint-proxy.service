@@ -1,0 +1,17 @@
+[Unit]
+Description=HAProxy Load Balancer
+After=network.target
+
+[Service]
+Environment="CONFIG=/usr/lib/octoprint-tornado/haproxy.cfg" "PIDFILE=/run/octoprint-proxy.pid" "EXTRAOPTS=-S /run/octoprint-proxy.sock"
+ExecStartPre=/usr/bin/haproxy -f $CONFIG -c -q $EXTRAOPTS
+ExecStart=/usr/bin/haproxy -Ws -f $CONFIG -p $PIDFILE $EXTRAOPTS
+ExecReload=/usr/bin/haproxy -f $CONFIG -c -q $EXTRAOPTS
+ExecReload=/bin/kill -USR2 $MAINPID
+KillMode=mixed
+Restart=always
+SuccessExitStatus=143
+Type=notify
+
+[Install]
+WantedBy=multi-user.target

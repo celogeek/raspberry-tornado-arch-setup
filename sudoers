@@ -1,5 +1,1 @@
-%octoprint ALL=() NOPASSWD: REBOOT, \
-	systemctl start octoprint-tornado-webcam, \
-	systemctl stop octoprint-tornado-webcam, \
-	systemctl restart octoprint-tornado-web
-
+octoprint ALL=(ALL) NOPASSWD: /sbin/reboot, /sbin/poweroff, /usr/bin/systemctl start octoprint-tornado-webcam, /usr/bin/systemctl stop octoprint-tornado-webcam, /usr/bin/systemctl restart octoprint-tornado-web

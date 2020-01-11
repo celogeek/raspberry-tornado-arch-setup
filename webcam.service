@@ -1,5 +1,7 @@
 [Unit]
 Description=Webcam
+Requires=dev-webcam.device octoprint-tornado-klipper.service
+After=dev-webcam.device octoprint-tornado-klipper.service
 BindsTo=dev-webcam.device octoprint-tornado-klipper.service
 
 [Service]

@@ -1,6 +1,8 @@
 [Unit]
 Description=3D printer firmware with motion planning on the host
 Conflicts=klipper.service
+Requires=dev-tornado.device
+After=dev-tornado.device
 BindsTo=dev-tornado.device
 Wants=octoprint-tornado-webcam.service
 
@@ -18,4 +20,3 @@ ExecStop=/usr/bin/curl -s 'http://localhost/api/connection' -H 'Content-Type: ap
 ExecStop=-/bin/sleep 5
 Restart=always
 RestartSec=10
-

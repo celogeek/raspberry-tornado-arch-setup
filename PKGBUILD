@@ -1,4 +1,4 @@
-pkgname=raspberry-tornado-arch-setup
+pkgname=octoprint-tornado
 pkgver=20200113
 pkgrel=1
 pkgdesc="Control my tornado installation"

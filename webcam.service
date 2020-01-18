@@ -7,7 +7,7 @@ BindsTo=dev-webcam.device octoprint-tornado-klipper.service
 [Service]
 Type=simple
 User=mjpg-streamer
-ExecStart=/usr/bin/mjpg_streamer -o "output_http.so" -i "input_uvc.so -d /dev/webcam -r 1280x720 -f 30"
+ExecStart=/usr/bin/mjpg_streamer -o "output_http.so -w /usr/lib/octoprint-tornado/webcam -n" -i "input_uvc.so -d /dev/webcam -r 1280x720 -f 30" 
 
 [Install]
 WantedBy=dev-webcam.device

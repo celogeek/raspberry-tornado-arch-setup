@@ -1,6 +1,6 @@
 pkgname=octoprint-tornado
-pkgver=20200118
-pkgrel=3
+pkgver=20200124
+pkgrel=2
 pkgdesc="Control my tornado installation"
 arch=(any)
 depends=(haproxy octoprint-venv mjpg-streamer-git)
@@ -24,7 +24,7 @@ sha256sums=('a9e47a2bea34ab898cf38c6694ff4ed28cfc753411bdeee1344da3dadb52caa8'
             '76a5b44c380db9d6f0935fd1aaaafb9e8c0bcc279ecbcd2d788f6296f6637591'
             'e676dc064412b72df8bcaa3ca360257b33b499232939a22b4d5e6775be30df92'
             'da93c968819136105e18910db705d72f006bb15d6e28d9ed6fbf1c5d148c66aa'
-            '523978f9aaa8a20fccac92a13c8a50cb1b3cf95e1dcc5a3fddf81e6e06fdc073'
+            'c793ac88133c3b2b69632e43a89bd0843cc2d5e7b7901dd4f1dbba19e9df14d1'
             '9d7a98dbd4a7f793507e0a52fbddb5c21442a0c500e247fb38ffbf19c7dac03c'
             'a8e7d3bf79c9f4974f66eeaa892ba2bac571825592906077f91bc24035a42da5'
             '20ff6bd0008f61ea089e921584211cddf094d2a9e73910b0e0e55925f0884b26'

@@ -1,10 +1,14 @@
 pkgname=octoprint-tornado
-pkgver=20200125
-pkgrel=3
+pkgver=20200307
+pkgrel=1
 pkgdesc="Control my tornado installation"
 arch=(any)
-depends=(haproxy octoprint-venv mjpg-streamer-git)
+depends=(haproxy mjpg-streamer-git python2-virtualenv yq)
+provides=('octoprint')
+conflicts=('octoprint')
+octoprintver=1.4.0
 source=(
+	https://github.com/foosel/OctoPrint/archive/${octoprintver}.tar.gz
 	tmpfiles.conf
 	sysusers.conf
 	haproxy.cfg
@@ -19,14 +23,15 @@ source=(
 	sudoers
 )
 
-sha256sums=('b245f7adf21dffb49d0811b2c970f22ae650a7809b75ee9c7beae175eb2bfd73'
-            '8587e15036027c09df5da3d27b0250621d30b1960d176ae31edf25004466d4e9'
+sha256sums=('46558dd965e2e60016f1b5aea4c559a48fa1d7dc6b03dcdd08efcbad034f72e8'
+            'd3be84b46413b0e66d92d20397a9caf4163f116044c12483bc06df41c497890a'
+            '808ffd5979ecd952190f2da77c04de43085b7483dc46c3c13020dc860ea4d352'
             '47546d4400ca02c73da3698e4b27cef87cdb64c05f45a613b4a5fdad6e17d763'
             '76a5b44c380db9d6f0935fd1aaaafb9e8c0bcc279ecbcd2d788f6296f6637591'
-            'e676dc064412b72df8bcaa3ca360257b33b499232939a22b4d5e6775be30df92'
+            '33e05a8bd4ed8020e5bad3002038fc31e622b19b4d560c4a305ab0f9d47ab182'
             'da93c968819136105e18910db705d72f006bb15d6e28d9ed6fbf1c5d148c66aa'
             '4945e016b9ec5fc56996d43142debda5613a64d9123e89d23b4229f38227d8de'
-            '1b0e6f70fb472dc9929b4de2c35888c448579ccdc6a79b24aa197a81bd8b04ee'
+            'c5cd881053a260722b2d24951d9e555ab6dd64a807847827e8d395c5500f1bbb'
             '9d7a98dbd4a7f793507e0a52fbddb5c21442a0c500e247fb38ffbf19c7dac03c'
             'a8e7d3bf79c9f4974f66eeaa892ba2bac571825592906077f91bc24035a42da5'
             '20ff6bd0008f61ea089e921584211cddf094d2a9e73910b0e0e55925f0884b26'
@@ -35,6 +40,15 @@ sha256sums=('b245f7adf21dffb49d0811b2c970f22ae650a7809b75ee9c7beae175eb2bfd73'
 install=$pkgname.install
 
 package() {
+
+	# octoprint
+	cd "${srcdir}/OctoPrint-${octoprintver}"
+	virtualenv2 "${pkgdir}/opt/$pkgname"
+	"${pkgdir}/opt/$pkgname/bin/python" setup.py install --optimize=1
+	sed -i "s|${pkgdir}/opt/$pkgname|/opt/$pkgname|g" "${pkgdir}/opt/$pkgname/bin/"* # relocate without breaking plugin system
+        cd -
+
+	# config
 	install -Dm644 haproxy.cfg $pkgdir/usr/lib/$pkgname/haproxy.cfg
 	install -Dm644 touchui.less $pkgdir/usr/lib/$pkgname/touchui.less
 	install -Dm644 webcam-tester.html $pkgdir/usr/lib/$pkgname/webcam/index.html
@@ -50,5 +64,4 @@ package() {
 	install -Dm750 -d "$pkgdir/etc/sudoers.d/"
 	install -Dm440 "$srcdir/sudoers" "$pkgdir/etc/sudoers.d/octoprint"
 }
-
 

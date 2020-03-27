@@ -1,5 +1,7 @@
 #!/bin/bash
 export PATH=/usr/sbin:/usr/bin:/sbin:/bin
+API_KEY=$(yq -rc .api.key /etc/octoprint-tornado/config.yaml)
+CONN="/opt/octoprint-tornado/bin/octoprint client -a ${API_KEY} post_json /api/connection"
 
 case $1 in
     start-pre)
@@ -9,10 +11,10 @@ case $1 in
     ;;
     start-post)
         sleep 5
-        curl -s 'http://localhost/api/connection' -H 'Content-Type: application/json' --data-binary '{"command":"connect","port":"/run/klipper/sock","baudrate":250000}'
+        $CONN '{"command":"connect","port":"/run/klipper/sock","baudrate":250000}'
     ;;
     stop)
-        curl -s 'http://localhost/api/connection' -H 'Content-Type: application/json' --data-binary '{"command":"disconnect"}'
+        $CONN '{"command":"disconnect"}'
         sleep 5
         kill $MAINPID
     ;;
